@@ -300,13 +300,16 @@ dependencies {
     testImplementation "org.projectlombok:lombok:$versions.lombok"
 
     // Cuda dependencies
-    // TODO update cuda dependencies to accommodate 11.2 and 11.4 for M2.1
+    // TODO update cuda dependencies to accommodate 11.4 and 11.6 for M2.1
     if (cuda_version != null) {
         if (is_cuda_version_valid) {
             implementation "org.nd4j:nd4j-cuda-$cuda_version-platform:$versions.nd4j"
             implementation "org.deeplearning4j:deeplearning4j-cuda-$cuda_version:$versions.dl4j"
             if (cuda_version == "10.2") {
                 implementation "org.bytedeco:cuda-platform-redist:10.2-7.6-1.5.3"
+            }
+            if (cuda_version == "11.2") {
+                implementation "org.bytedeco:cuda"
             }
         } else {
             throw new GradleException("Invalid CUDA Version: $cuda_version - Must be one of $valid_cuda_versions")
