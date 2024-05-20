@@ -300,6 +300,7 @@ dependencies {
     testImplementation "org.projectlombok:lombok:$versions.lombok"
 
     // Cuda dependencies
+    // TODO update cuda dependencies to accommodate 11.2 and 11.4 for M2.1
     if (cuda_version != null) {
         if (is_cuda_version_valid) {
             implementation "org.nd4j:nd4j-cuda-$cuda_version-platform:$versions.nd4j"
