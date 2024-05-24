@@ -196,6 +196,8 @@ static def getExcludePlatform(platform) {
  */
 def createCudaDirTask(cuda_version, platform) {
     return tasks.create("makeCuda-$cuda_version-$platform", Copy) {
+        setProperty("zip64", true)
+
         def cuda_dist_lib_dir = "dist/${project.name}-cuda-$cuda_version-$platform/lib"
         doFirst {
             mkdir cuda_dist_lib_dir
