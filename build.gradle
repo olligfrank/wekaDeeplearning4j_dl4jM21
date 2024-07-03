@@ -1,7 +1,11 @@
-// Specify plugins
+/// Specify plugins
 plugins {
     id 'java-library'
     id 'maven-publish'
+}
+
+tasks.withType(Zip) {
+    zip64 = true
 }
 
 // Set project info
@@ -196,8 +200,6 @@ static def getExcludePlatform(platform) {
  */
 def createCudaDirTask(cuda_version, platform) {
     return tasks.create("makeCuda-$cuda_version-$platform", Copy) {
-        setProperty("zip64", true)
-
         def cuda_dist_lib_dir = "dist/${project.name}-cuda-$cuda_version-$platform/lib"
         doFirst {
             mkdir cuda_dist_lib_dir
@@ -258,6 +260,7 @@ if (is_cuda_version_valid) {
      * Cuda task
      */
     task makeCuda(dependsOn: make_cuda_deps) {
+
         doLast{
             println("Cuda-$cuda_version package distribution built. Final zip file can be found in ./dist/")
         }
@@ -308,16 +311,15 @@ dependencies {
             implementation "org.nd4j:nd4j-cuda-$cuda_version-platform:$versions.nd4j"
 
             // terrible, terrible, terrible fix
-            if (cuda_version == "11.4") {
+            if (cuda_version == "11.6") {
+                implementation "org/bytedeco/cuda-platform-redist/11.6-8.3-1.5.7"
+            } else if (cuda_version == "11.4") {
                 implementation "org.bytedeco:cuda-platform-redist:11.4-8.2-1.5.6"
+            } else if (cuda_version == "10.2") {
+                implementation "org.bytedeco:cuda-platform-redist:10.2-7.6-1.5.3"
             } else {
                 implementation "org.deeplearning4j:deeplearning4j-cuda-$cuda_version:$versions.dl4j"
             }
-
-            if (cuda_version == "10.2") {
-                implementation "org.bytedeco:cuda-platform-redist:10.2-7.6-1.5.3"
-            }
-
         } else {
             throw new GradleException("Invalid CUDA Version: $cuda_version - Must be one of $valid_cuda_versions")
         }

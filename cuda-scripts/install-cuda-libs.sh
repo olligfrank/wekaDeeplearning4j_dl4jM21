@@ -14,8 +14,9 @@ zip_name="wekaDeeplearning4j-cuda-$cuda_version-$version-$platform-x86_64.zip"
 selected_download=$1
 
 
-if [[ ${cuda_version} != "10.0"  && ${cuda_version} != "10.1" && ${cuda_version} != "10.2" && ${cuda_version} != "11.4" && ${cuda_version} != "11.6" ]]; then
+if [[ ${cuda_version} != "10.0"  && ${cuda_version} != "10.1" && ${cuda_version} != "10.2" && ${cuda_version} != "11.4" && ${cuda_version} != "11.6" && ${cuda_version} != "12.0" ]]; then
   echo -e "Could not detect CUDA version. Is CUDA installed?"
+  #echo -e $[cuda_version]
   exit 1
 fi
 
