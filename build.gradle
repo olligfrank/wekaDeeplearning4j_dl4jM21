@@ -312,7 +312,7 @@ dependencies {
 
             // terrible, terrible, terrible fix
             if (cuda_version == "11.6") {
-                implementation "org/bytedeco/cuda-platform-redist/11.6-8.3-1.5.7"
+                implementation "org.bytedeco.cuda-platform-redist:11.6-8.3-1.5.7"
             } else if (cuda_version == "11.4") {
                 implementation "org.bytedeco:cuda-platform-redist:11.4-8.2-1.5.6"
             } else if (cuda_version == "10.2") {
