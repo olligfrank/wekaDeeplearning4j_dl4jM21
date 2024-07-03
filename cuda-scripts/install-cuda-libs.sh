@@ -13,7 +13,7 @@ version='1.7.2'
 zip_name="wekaDeeplearning4j-cuda-$cuda_version-$version-$platform-x86_64.zip"
 selected_download=$1
 
-
+# TODO: need to revise this section and determine if it's really necessary for the end user to download the entire cuda toolkit just to install this....
 if [[ ${cuda_version} != "10.0"  && ${cuda_version} != "10.1" && ${cuda_version} != "10.2" && ${cuda_version} != "11.4" && ${cuda_version} != "11.6" && ${cuda_version} != "12.0" ]]; then
   echo -e "Could not detect CUDA version. Is CUDA installed?"
   #echo -e $[cuda_version]
